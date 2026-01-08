@@ -30,6 +30,16 @@ jobs:
       
       - name: List files
         run: ls -la
+
+      - name: Access secret
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          if [ -z "${TEST_SECRET}" ]; then
+            echo "TEST_SECRET is not set"
+            exit 1
+          fi
+          echo "Secret length: ${#TEST_SECRET}"
       
       - name: Print success message
         run: echo "✅ Workflow completed successfully 🥳!"
