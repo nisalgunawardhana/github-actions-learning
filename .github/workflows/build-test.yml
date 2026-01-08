@@ -32,11 +32,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: 'sample-app/package-lock.json'
-      
+
       - name: Print environment
         run: |
           echo "Environment: ${{ env.NODE_ENV }}"
-          echo "Log Level: ${{ env.LOG_LEVEL }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"    
       
       - name: Install dependencies
         working-directory: ./sample-app
