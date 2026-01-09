@@ -12,16 +12,13 @@
 ## Evidence
 
 ### Task 1: Manual Run
-Successfully triggered the workflow manually on the main branch.
-![Manual Run](../../images/task1-manual-run.png)
+![Manual Run](/images/task1-manual-run.png)
 
 ### Task 2: Push Trigger
-Successfully added a push trigger that automatically runs the workflow.
-![Push Trigger](../../images/task2-push-trigger.png)
+![Push Trigger](/images/task2-push-trigger.png)
 
 ### Task 3: Local Tests
-All 8 tests passed successfully on my Linux Mint environment.
-![Local Tests](../../images/task3-local-tests.png)
+![Local Tests](/images/task3-local-tests.png)
 
 ## Notes
 Any challenges faced or additional context.
