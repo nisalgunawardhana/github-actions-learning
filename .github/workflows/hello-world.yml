@@ -1,8 +1,9 @@
+# Task 2: Testing automatic push trigger for Shanuka
 name: Hello World Workflow
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, working-beginner-shanuka]
   workflow_dispatch:
 
 jobs:
