@@ -27,7 +27,7 @@ Type your level (type exactly as shown):
 
 **GitHub Username:Madhu20021111** @[your-username]
 
-**PR Link:https://github.com/nisalgunawardhana/github-actions-learning/pull/27** [Paste your pull request URL]
+**PR Link:https://github.com/nisalgunawardhana/github-actions-learning/pull/27** [[Paste your pull request URL](https://github.com/nisalgunawardhana/github-actions-learning/pull/27)]
 
 **Branch Name:working-beginner-Nirosha** working-[level]-[yourname]
 
