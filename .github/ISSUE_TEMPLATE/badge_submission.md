@@ -1,7 +1,7 @@
 ---
 name: 🎖️ Badge Submission
 about: Submit your completed tasks for badge review
-title: "🎖️ Badge Submission - [Your Name]"
+title: "🎖️ Badge Submission - [Nirosha Madhumali]"
 labels: ['submission', 'pending-review']
 assignees: ['nisalgunawardhana']
 ---
@@ -19,19 +19,19 @@ Type your level (type exactly as shown):
 - Type: **intermediate** (Tasks 4-7)  
 - Type: **advanced** (Tasks 8-10)
 
-**My Level:** 
+**My Level:beginner** 
 
 ---
 
 ## 👤 Your Information
 
-**GitHub Username:** @[your-username]
+**GitHub Username:Madhu20021111** @[your-username]
 
-**PR Link:** [Paste your pull request URL]
+**PR Link:https://github.com/nisalgunawardhana/github-actions-learning/pull/27** [Paste your pull request URL]
 
-**Branch Name:** working-[level]-[yourname]
+**Branch Name:working-beginner-Nirosha** working-[level]-[yourname]
 
-**Submission File:** .github/submissions/[level]-[yourname].md
+**Submission File:.github/submissions/beginner-nirosha.md** .github/submissions/[level]-[yourname].md
 
 ---
 
