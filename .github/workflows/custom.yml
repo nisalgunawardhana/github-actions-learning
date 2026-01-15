@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./sample-app
-        run: npm ci
+        run: npm install
 
       - name: Run tests
         working-directory: ./sample-app
