@@ -1,7 +1,15 @@
-<img width="1911" height="879" alt="Intermediate_Task_07" src="https://github.com/user-attachments/assets/ef6033aa-7495-4c50-b0e5-b80c9f52e188" />
+Task 04
 
-<img width="1915" height="906" alt="Intermediate_Task_06" src="https://github.com/user-attachments/assets/63ccc6d9-c26a-4b14-9011-49d0aad0b9a9" />
+<img width="1913" height="903" alt="Intermediate_Task_04" src="https://github.com/user-attachments/assets/1060711b-84fe-4e34-b7b4-02659a9794aa" />
 
-<img width="1914" height="901" alt="Intermediate_Task_05" src="https://github.com/user-attachments/assets/993fd554-5f70-44f7-9f82-8e703b0332c1" />
+Task 05
 
-<img width="1909" height="902" alt="Intermediate_Task_04" src="https://github.com/user-attachments/assets/d2fa1ba9-c686-488b-8f33-47e3a8919167" />
+<img width="1911" height="903" alt="Intermediate_Task_05" src="https://github.com/user-attachments/assets/36a95dba-53e7-4979-9098-6295b22dadd3" />
+
+Task 06
+
+<img width="1914" height="905" alt="Intermediate_Task_06" src="https://github.com/user-attachments/assets/acab9581-b489-4349-b9c9-3af8258f48dc" />
+
+Task 07
+
+<img width="1897" height="902" alt="Intermediate_Task_07" src="https://github.com/user-attachments/assets/ce054ed0-6312-4b98-83c1-1e630db0c89b" />
