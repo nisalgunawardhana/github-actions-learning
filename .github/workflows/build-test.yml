@@ -20,3 +20,7 @@ jobs:
         run: |
           echo "Environment: $NODE_ENV"
           echo "Log Level: $LOG_LEVEL"
+
+    strategy:
+      matrix:
+       node-version: [16.x, 18.x, 20.x]
