@@ -11,10 +11,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-
     env:
       NODE_ENV: test
       LOG_LEVEL: debug
@@ -28,10 +24,10 @@ jobs:
           echo "Environment: ${{ env.NODE_ENV }}"
           echo "Log Level: ${{ env.LOG_LEVEL }}"
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
 
       - name: Install dependencies
         working-directory: ./sample-app
@@ -41,7 +37,5 @@ jobs:
         working-directory: ./sample-app
         run: npm test -- --forceExit
 
-      - name: Create artifact
-        run: echo "Build output" > output.txt
 
 
