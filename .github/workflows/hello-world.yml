@@ -32,4 +32,9 @@ jobs:
         run: ls -la
       
       - name: Print success message
-        run: echo "✅ Workflow completed successfully!" # End of workflow
+        run: echo "✅ Workflow completed successfully!" 
+        
+      - name: Access secret
+        run: |
+          SECRET="${{ secrets.TEST_SECRET }}"
+          echo "Secret length: ${#SECRET}"
