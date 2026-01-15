@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
     env:
       NODE_ENV: test
       LOG_LEVEL: debug
@@ -18,9 +22,5 @@ jobs:
 
       - name: Print environment
         run: |
-          echo "Environment: $NODE_ENV"
-          echo "Log Level: $LOG_LEVEL"
-
-    strategy:
-      matrix:
-       node-version: [16.x, 18.x, 20.x]
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
