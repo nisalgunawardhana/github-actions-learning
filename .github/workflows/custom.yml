@@ -16,11 +16,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
+          cache-dependency-path: './sample-app/package-lock.json'
 
       - name: Install dependencies
-        run: npm install
-        working-directory: sample-app
+        working-directory: ./sample-app
+        run: npm ci
 
       - name: Run tests
+        working-directory: ./sample-app
         run: npm test
-        working-directory: sample-app
