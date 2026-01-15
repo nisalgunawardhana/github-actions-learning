@@ -150,7 +150,7 @@ Complete tasks at each level and submit your work to earn prestigious badges!
 
 ---
 
-### ⭐⭐⭐ Advanced Badge
+### ⭐⭐⭐ Advanced Badge 
 **Complete Tasks 8-10**
 
 **Steps:**
@@ -167,6 +167,8 @@ Complete tasks at each level and submit your work to earn prestigious badges!
 - Task 8: Artifacts uploaded & downloaded between jobs ✅
 - Task 9: Conditional execution (deploy on main only) ✅
 - Task 10: PR created with template & issue using template ✅
+
+I have Completed all the 10 Tasks
 
 ---
 
