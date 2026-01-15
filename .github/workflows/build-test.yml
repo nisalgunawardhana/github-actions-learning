@@ -24,3 +24,16 @@ jobs:
         run: |
           echo "Environment: ${{ env.NODE_ENV }}"
           echo "Log Level: ${{ env.LOG_LEVEL }}"
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        working-directory: ./sample-app
+        run: npm install
+
+      - name: Run tests
+        working-directory: ./sample-app
+        run: npm test -- --forceExit
