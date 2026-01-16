@@ -17,13 +17,3 @@ jobs:
           cd sample-app
           npm install
           npm test
-
-
-
-#       Create .github/workflows/custom.yml
-# Add a workflow that:
-# Triggers on push to develop branch
-# Sets up Node.js 18
-# Runs: npm install && npm test in the sample-app directory
-# Commit and push to the develop branch
-# Verify the workflow runs in Actions tab
