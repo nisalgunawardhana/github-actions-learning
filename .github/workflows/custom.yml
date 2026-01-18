@@ -16,4 +16,4 @@ jobs:
         run: |
           cd sample-app
           npm install
-          npm test --force-exit
+          npm test -- --forceExit
