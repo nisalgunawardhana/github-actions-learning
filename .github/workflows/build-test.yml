@@ -52,7 +52,7 @@ jobs:
       
       - name: Run tests
         working-directory: ./sample-app
-        run: npm test
+        run: npm test -- --forceExit
       
       - name: Upload coverage reports
         if: matrix.node-version == '18.x'
