@@ -6,7 +6,7 @@ on:
 
 jobs:
   custom-job:
-    name: Run Tests in Sample App
+    name: Run Tests in the Sample App
     runs-on: ubuntu-latest
 
     steps:
