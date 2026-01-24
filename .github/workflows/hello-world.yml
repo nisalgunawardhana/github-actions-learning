@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
   workflow_dispatch:
-
+# This workflow runs automatically when code is pushed to main or develop
 jobs:
   hello:
     name: Say Hello
