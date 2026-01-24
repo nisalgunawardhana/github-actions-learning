@@ -1,0 +1,25 @@
+name: Custom Workflow
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  custom-job:
+    name: Run Tests in Sample App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v3 
+        with:
+          node-version: "18"
+
+      - name: Install dependencies and run tests
+        run: |
+          npm install
+          npm test
+        working-directory: ./sample-app
