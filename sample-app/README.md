@@ -1,7 +1,6 @@
-# Testing GitHub Actions trigger
 # Sample Node.js Application
 
-This is a simple Express.js application for learning GitHub Actions.
+This is a simple Express.js application for learning GitHub Actions. Built with best practices for CI/CD workflows using GitHub Actions.
 
 ## Getting Started
 
