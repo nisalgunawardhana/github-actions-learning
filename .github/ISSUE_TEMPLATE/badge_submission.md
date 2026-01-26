@@ -25,13 +25,13 @@ Type your level (type exactly as shown):
 
 ## 👤 Your Information
 
-**GitHub Username:** @[your-username]
+**GitHub Username:** @luqmanbooso
 
-**PR Link:** [Paste your pull request URL]
+**PR Link:** https://github.com/nisalgunawardhana/github-actions-learning/pull/58
 
-**Branch Name:** working-[level]-[yourname]
+**Branch Name:** working-beginner-luqmanbooso
 
-**Submission File:** .github/submissions/[level]-[yourname].md
+**Submission File:** .github/submissions/beginner-luqmanbooso.md
 
 ---
 
@@ -39,11 +39,11 @@ Type your level (type exactly as shown):
 
 Before submitting, confirm:
 
-- [ ] I have completed ALL tasks for my level
-- [ ] I have created the submission file in `.github/submissions/`
-- [ ] I have created a Pull Request
-- [ ] I have added evidence/screenshots to my submission
-- [ ] I have read the [README.md](README.md)
+- [✓] I have completed ALL tasks for my level
+- [✓] I have created the submission file in `.github/submissions/`
+- [✓] I have created a Pull Request
+- [✓] I have added evidence/screenshots to my submission
+- [✓] I have read the [README.md](README.md)
 
 ---
 
@@ -70,7 +70,7 @@ Before submitting, confirm:
 ## 📝 Additional Notes
 
 Any challenges or notes:
-
+First time making a contribution this way , really grateful for the opportuniy u have brought upon.
 ---
 
 ## 🤖 What Happens Next
