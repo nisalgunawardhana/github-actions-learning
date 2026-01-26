@@ -48,12 +48,12 @@ jobs:
         run: npm test
       
       - name: Upload coverage reports
-        if: matrix.node-version == '18.x'
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report-${{ matrix.node-version }}
-          path: sample-app/coverage/
-          retention-days: 30
+  if: matrix.node-version == '18.x'
+  uses: actions/upload-artifact@v4   # ✅ updated version
+  with:
+    name: coverage-report-${{ matrix.node-version }}
+    path: sample-app/coverage/
+    retention-days: 30
       
       - name: Check coverage
         if: always()
