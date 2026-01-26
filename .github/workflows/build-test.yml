@@ -46,14 +46,23 @@ jobs:
       - name: Run tests
         working-directory: ./sample-app
         run: npm test
-      
+
+      - name: Create artifact
+        run: echo "Build output for Node ${{ matrix.node-version }}" > output.txt
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-${{ matrix.node-version }}
+          path: output.txt
+
       - name: Upload coverage reports
-  if: matrix.node-version == '18.x'
-  uses: actions/upload-artifact@v4   # ✅ updated version
-  with:
-    name: coverage-report-${{ matrix.node-version }}
-    path: sample-app/coverage/
-    retention-days: 30
+        if: matrix.node-version == '18.x'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.node-version }}
+          path: sample-app/coverage/
+          retention-days: 30
       
       - name: Check coverage
         if: always()
@@ -63,28 +72,44 @@ jobs:
             echo "✅ Coverage report generated"
           else
             echo "⚠️ No coverage report found"
-          fi
 
   lint-check:
     name: Lint Check
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: 'sample-app/package-lock.json'
       
-      - working-directory: ./sample-app
+      - name: Install dependencies
+        working-directory: ./sample-app
         run: npm ci
       
       - name: Run ESLint
         working-directory: ./sample-app
         run: npm run lint
         continue-on-error: true
+
+  consume-artifact:
+    name: Consume Artifact
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output-18.x   # example: download artifact from Node 18.x run
+
+      - name: Show artifact contents
+        run: cat build-output-18.x/output.txt
 
   test-summary:
     name: Test Summary
