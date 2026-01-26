@@ -33,11 +33,10 @@ jobs:
       
       - name: Access secret
         run: |
-          echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
+          # Pass the secret into an environment variable
+          echo "Secret length: ${#TEST_SECRET}"
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
       
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
-
-              - name: Access secret
-        run: |
-          echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
