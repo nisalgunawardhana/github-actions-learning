@@ -32,7 +32,7 @@ jobs:
         run: ls -la
       
       - name: Access secret
-        run: echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
+        run: echo "Secret exists: ${{ secrets.TEST_SECRET != '' }}"
       
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
