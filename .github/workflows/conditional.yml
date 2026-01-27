@@ -1,0 +1,31 @@
+name: Conditional Execution
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  conditional-job:
+    name: Conditional Steps
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Always run
+        run: echo "This step always runs"
+      
+      - name: Deploy (main only)
+        if: github.ref == 'refs/heads/main'
+        run: echo "Deploying to production..."
+      
+      - name: Development build (develop only)
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Building for development..."
+      
+      - name: Show branch info
+        run: |
+          echo "Current branch: ${{ github.ref }}"
+          echo "Event: ${{ github.event_name }}"

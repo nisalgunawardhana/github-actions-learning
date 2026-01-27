@@ -23,6 +23,13 @@ app.get('/api/hello', (req, res) => {
   });
 });
 
+app.get('/api/time', (req, res) => {
+  res.json({
+    currentTime: new Date().toISOString(),
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  });
+});
+
 app.get('/api/status', (req, res) => {
   res.json({
     status: 'healthy',
