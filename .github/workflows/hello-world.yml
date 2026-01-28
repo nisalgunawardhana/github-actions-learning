@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
   workflow_dispatch:
-
+# Say hello
 jobs:
   hello:
     name: Say Hello
@@ -33,3 +33,7 @@ jobs:
       
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
+
+      - name: Access secret
+        run: | 
+          echo "Secret length: ${{ secrets.TEST_SECRET}}"
