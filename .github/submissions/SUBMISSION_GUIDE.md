@@ -69,7 +69,6 @@ Inside your submission file, add screenshots or proof for each task:
 - Show successful test outputs
 - Demonstrate working implementations
 - Include workflow YAML snippets if relevant
-
 ### Step 5: Commit & Push
 ```bash
 git add .github/submissions/your-file.md
