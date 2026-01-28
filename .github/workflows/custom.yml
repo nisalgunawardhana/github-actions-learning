@@ -1,28 +1,13 @@
 name: Custom Workflow
-# on:
-#   push:
-#     branches: [develop]
-
-# jobs:
-#   custom-job:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       # Add more steps...
-#       name: CI on Develop
-
 on:
   push:
-    branches:
-      - develop
+    branches: [develop]
 
 jobs:
-  build-and-test:
+  custom-job:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Setup Node.js 18
         uses: actions/setup-node@v3
