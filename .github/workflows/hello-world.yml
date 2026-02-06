@@ -27,7 +27,7 @@ jobs:
 
       - name: Access secret
         run: |
-          echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
+          echo "Secret length: ${{ secrets.TEST_SECRET }}"
       
       - name: Check out code
         uses: actions/checkout@v3
