@@ -1,5 +1,5 @@
 name: Hello World Workflow
-
+# This workflow runs on pushes to the main and develop branches, as well as when manually triggered.
 on:
   push:
     branches: [main, develop]
