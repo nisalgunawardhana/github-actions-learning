@@ -24,6 +24,10 @@ jobs:
           echo "GitHub SHA: ${{ github.sha }}"
           echo "GitHub Ref: ${{ github.ref }}"
           echo "Actor: ${{ github.actor }}"
+
+      - name: Access secret
+        run: |
+          echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
       
       - name: Check out code
         uses: actions/checkout@v3
