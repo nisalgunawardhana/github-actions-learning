@@ -1,0 +1,19 @@
+name: Custom Workflow
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  custom-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - name: Install and Test
+        working-directory: ./sample-app
+        run: npm install && npm test
