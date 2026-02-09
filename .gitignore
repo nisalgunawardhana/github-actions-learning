@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-package-lock.json
+
 yarn.lock
 
 # Build outputs
@@ -40,3 +40,6 @@ temp/
 # OS
 .DS_Store
 Thumbs.db
+
+
+!sample-app/package-lock.json

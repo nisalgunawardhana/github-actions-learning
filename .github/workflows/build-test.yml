@@ -14,10 +14,14 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      LOG_LEVEL: debug
+
     
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x, 18.x, 20.x]
     
     steps:
       - name: Checkout code
@@ -29,6 +33,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: 'sample-app/package-lock.json'
+
+      - name: Print environment
+        run: |
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
+
       
       - name: Install dependencies
         working-directory: ./sample-app
@@ -46,10 +56,37 @@ jobs:
       - name: Run tests
         working-directory: ./sample-app
         run: npm test
+
+      - name: Create artifact file
+        run: echo "Build output from ${{ matrix.node-version }}" > output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-${{ matrix.node-version }}
+          path: output.txt
+
+  download-artifact:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded-artifacts
+
+      - name: List downloaded files
+        run: ls -R downloaded-artifacts
+
+
       
       - name: Upload coverage reports
         if: matrix.node-version == '18.x'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report-${{ matrix.node-version }}
           path: sample-app/coverage/
