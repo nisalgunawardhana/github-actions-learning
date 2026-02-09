@@ -156,4 +156,4 @@ The app includes a health check endpoint at `/health` which returns HTTP 200 whe
 
 **Happy learning! 🎓**
 
-Update for Advanced Task 10.
+Update for Advanced Task 10 demonstration.
