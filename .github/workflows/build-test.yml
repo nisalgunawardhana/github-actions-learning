@@ -68,7 +68,7 @@ jobs:
 
   download-artifact:
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: build-and-test
 
     steps:
       - name: Download artifacts
