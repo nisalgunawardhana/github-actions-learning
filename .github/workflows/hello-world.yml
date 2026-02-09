@@ -1,5 +1,7 @@
 name: Hello World Workflow
 
+# testing push trigger by Luthira
+
 on:
   push:
     branches: [main, develop]
@@ -33,3 +35,12 @@ jobs:
       
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
+
+      - name: Access secret
+        shell: bash
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          echo "Secret length: ${#TEST_SECRET}"
+
+
