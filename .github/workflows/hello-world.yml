@@ -10,7 +10,7 @@ jobs:
     name: Say Hello
     runs-on: ubuntu-latest
     
-    steps:
+    steps: #hello i am this will print welcome message
       - name: Print hello message
         run: echo "🎉 Hello from GitHub Actions!"
       
