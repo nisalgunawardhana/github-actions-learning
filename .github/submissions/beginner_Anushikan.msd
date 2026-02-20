@@ -13,12 +13,15 @@
 
 ### Task 1: Hello World Workflow
 [Screenshot showing successful workflow run]
+C:\Users\user\Downloads\Github\github-actions-learning\images\image1.jpeg
 
 ### Task 2: Push Trigger
 [Screenshot showing workflow triggered automatically on push]
+C:\Users\user\Downloads\Github\github-actions-learning\images\image2.jpeg
 
 ### Task 3: Local Tests
 [Screenshot showing npm test output - all passing]
+C:\Users\user\Downloads\Github\github-actions-learning\images\image4.jpg
 
 
 ## Notes
