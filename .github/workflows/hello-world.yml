@@ -9,14 +9,14 @@ jobs:
   hello:
     name: Say Hello
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Print hello message
-        run: echo "🎉 Hello from GitHub Actions!"
-      
+        run: echo "🎉 Hello from GitHub Actions!!"
+
       - name: Print current time
         run: date
-      
+
       - name: Print runner information
         run: |
           echo "Runner OS: ${{ runner.os }}"
@@ -24,12 +24,12 @@ jobs:
           echo "GitHub SHA: ${{ github.sha }}"
           echo "GitHub Ref: ${{ github.ref }}"
           echo "Actor: ${{ github.actor }}"
-      
+
       - name: Check out code
         uses: actions/checkout@v3
-      
+
       - name: List files
         run: ls -la
-      
+
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
