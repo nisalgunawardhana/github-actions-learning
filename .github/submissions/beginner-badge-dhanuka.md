@@ -14,3 +14,7 @@ shell: /usr/bin/bash -e {0}
 Show the message "This workflow has a workflow_dispatch event trigger."
 
 ### Task 3: Build and Test Locally
+
+In the `http://localhost:3000` shows `{"message":"Welcome to GitHub Actions Learning App!","status":"OK","version":"1.0.0"}`
+
+In the `http://localhost:3000/api/hello` shows `{"message":"Hello, World!","timestamp":"2026-03-25T14:49:39.773Z"}`
