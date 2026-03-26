@@ -30,8 +30,8 @@ Trigger only when specific files change:
 on:
   push:
     paths:
-      - 'src/**'
-      - 'package.json'
+      - "src/**"
+      - "package.json"
 ```
 
 Ignore specific branches or files:
@@ -40,10 +40,10 @@ Ignore specific branches or files:
 on:
   push:
     branches-ignore:
-      - 'hotfix/**'
+      - "hotfix/**"
     paths-ignore:
-      - 'README.md'
-      - 'docs/**'
+      - "README.md"
+      - "docs/**"
 ```
 
 ### 2. Pull Request Events
@@ -64,6 +64,7 @@ on:
 ```
 
 PR action types:
+
 - `opened` - PR is opened
 - `synchronize` - New commits pushed to PR
 - `reopened` - PR is reopened
@@ -72,22 +73,66 @@ PR action types:
 
 ### 3. Scheduled Events (Cron)
 
+Cron patterns are used in GitHub Actions (and Linux cron jobs) to schedule workflows at specific times ⏰
+
+#### 🔹 Cron Format (5 fields)
+
+```
+* * * * *
+│ │ │ │ │
+│ │ │ │ └── Day of week (0–7) (Sun = 0 or 7)
+│ │ │ └──── Month (1–12)
+│ │ └────── Day of month (1–31)
+│ └──────── Hour (0–23)
+└────────── Minute (0–59)
+```
+
+#### Basic Syntax
+
 Run workflows on a schedule:
 
 ```yaml
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
+    - cron: "0 0 * * *" # Daily at midnight UTC
 ```
 
-Common Cron Patterns:
+#### 🔹 Common Examples
+
+**✅ Every 5 minutes**
 
 ```yaml
-'0 0 * * *'        # Every day at 00:00 UTC
-'0 * * * *'        # Every hour
-'0 0 * * 0'        # Every Sunday at 00:00 UTC
-'30 9 * * 1-5'     # 09:30 UTC on weekdays
-'0 0 1 * *'        # First day of every month
+"*/5 * * * *"
+```
+
+**✅ Every hour**
+
+```yaml
+"0 * * * *"
+```
+
+**✅ Every day at midnight**
+
+```yaml
+"0 0 * * *"
+```
+
+**✅ Every day at 9 AM**
+
+```yaml
+"0 9 * * *"
+```
+
+**✅ Every Monday at 10 AM**
+
+```yaml
+"0 10 * * 1"
+```
+
+**✅ Every 1st day of month**
+
+```yaml
+"0 0 1 * *"
 ```
 
 ### 4. Manual Trigger
@@ -105,11 +150,11 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment to deploy to'
+        description: "Environment to deploy to"
         required: true
-        default: 'staging'
+        default: "staging"
       version:
-        description: 'Version to deploy'
+        description: "Version to deploy"
         required: true
 ```
 
@@ -176,7 +221,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 0'  # Weekly
+    - cron: "0 0 * * 0" # Weekly
   workflow_dispatch:
 ```
 
@@ -201,8 +246,8 @@ jobs:
 on:
   push:
     branches:
-      - '**'           # All branches
-      - '!gh-pages'    # Except gh-pages
+      - "**" # All branches
+      - "!gh-pages" # Except gh-pages
 ```
 
 ### Workflow Run Trigger
@@ -233,7 +278,7 @@ on:
 ```yaml
 on:
   schedule:
-    - cron: '0 2 * * *'  # 2 AM daily
+    - cron: "0 2 * * *" # 2 AM daily
   workflow_dispatch:
 ```
 
@@ -246,7 +291,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment'
+        description: "Environment"
         required: true
 ```
 
@@ -255,7 +300,7 @@ on:
 ```yaml
 on:
   schedule:
-    - cron: '0 0 * * 1'  # Every Monday
+    - cron: "0 0 * * 1" # Every Monday
 ```
 
 ## Best Practices
@@ -264,7 +309,7 @@ on:
 ✅ Use **paths** filters to avoid unnecessary runs  
 ✅ Use **scheduled workflows** for maintenance tasks  
 ✅ Use **workflow_dispatch** for manual operations  
-✅ **Document** why workflows trigger when they do  
+✅ **Document** why workflows trigger when they do
 
 ## Common Mistakes
 
@@ -272,7 +317,7 @@ on:
 ❌ Not filtering branches (runs on all branches)  
 ❌ Setting cron jobs at the same time (GitHub might throttle)  
 ❌ Forgetting UTC timezone for scheduled runs  
-❌ Too broad `paths` filters causing unnecessary runs  
+❌ Too broad `paths` filters causing unnecessary runs
 
 ## Context Variables
 
