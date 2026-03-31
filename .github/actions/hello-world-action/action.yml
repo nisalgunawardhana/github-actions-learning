@@ -1,0 +1,55 @@
+name: 'Hello World Action'
+description: 'A simple custom GitHub Action that greets users'
+author: 'GitHub Actions Learning'
+
+inputs:
+  name:
+    description: 'Name to greet'
+    required: false
+    default: 'World'
+  
+  greeting-style:
+    description: 'Style of greeting (friendly, formal, casual)'
+    required: false
+    default: 'friendly'
+
+outputs:
+  greeting-message:
+    description: 'The greeting message'
+  timestamp:
+    description: 'When the greeting was generated'
+
+runs:
+  using: 'composite'
+  
+  steps:
+    - name: Generate greeting
+      id: greeting
+      shell: bash
+      run: |
+        echo "Generating greeting for: ${{ inputs.name }}"
+        echo "Style: ${{ inputs.greeting-style }}"
+        
+        case "${{ inputs.greeting-style }}" in
+          formal)
+            MESSAGE="Good day, ${{ inputs.name }}! It is a pleasure to meet you."
+            ;;
+          casual)
+            MESSAGE="Hey ${{ inputs.name }}! What's up?"
+            ;;
+          friendly)
+            MESSAGE="Hello, ${{ inputs.name }}! 👋 Welcome!"
+            ;;
+          *)
+            MESSAGE="Hello, ${{ inputs.name }}!"
+            ;;
+        esac
+        
+        echo "greeting-message=$MESSAGE" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+    
+    - name: Display greeting
+      shell: bash
+      run: |
+        echo "✨ ${{ steps.greeting.outputs.greeting-message }}"
+        echo "Generated at: ${{ steps.greeting.outputs.timestamp }}"

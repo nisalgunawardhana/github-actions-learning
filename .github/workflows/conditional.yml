@@ -1,0 +1,55 @@
+name: Conditional Execution
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  branch-detection:
+    name: Detect Branch and Execute Conditionally
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Print current branch
+        run: echo "Current branch: ${{ github.ref }}"
+      
+      - name: Development deployment (develop only)
+        if: github.ref == 'refs/heads/develop'
+        run: echo "🚀 Deploying to development environment..."
+      
+      - name: Staging deployment (staging only)
+        if: github.ref == 'refs/heads/staging'
+        run: echo "🚀 Deploying to staging environment..."
+      
+      - name: Production deployment (main only)
+        if: github.ref == 'refs/heads/main'
+        run: echo "🚀 Deploying to production environment..."
+      
+      - name: Feature branch notice
+        if: startsWith(github.ref, 'refs/heads/feature/')
+        run: echo "✨ Feature branch detected: ${{ github.ref }}"
+      
+      - name: Pull request deployment
+        if: github.event_name == 'pull_request'
+        run: echo "🔄 PR triggered deployment skipped"
+      
+      - name: Manual dispatch execution
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "🎯 Manually triggered workflow running"
+      
+      - name: Setup Node.js (deploy on main)
+        if: github.ref == 'refs/heads/main'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Deploy message (main only)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "=== PRODUCTION DEPLOYMENT ==="
+          echo "Branch: main"
+          echo "Deploying application..."
+          echo "✅ Deployment complete"

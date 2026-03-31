@@ -1,0 +1,86 @@
+name: Code Coverage Report
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'sample-app/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  coverage:
+    name: Generate and Upload Coverage
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'sample-app/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: ./sample-app
+        run: npm ci
+      
+      - name: Run tests with coverage
+        working-directory: ./sample-app
+        run: npm test -- --coverage
+      
+      - name: Display coverage summary
+        working-directory: ./sample-app
+        run: |
+          echo "📊 Coverage Report"
+          echo "=================="
+          if [ -f coverage/coverage-summary.json ]; then
+            cat coverage/coverage-summary.json | jq '.total'
+          else
+            echo "Coverage file not found"
+          fi
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./sample-app/coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          verbose: true
+        continue-on-error: true
+      
+      - name: Upload coverage as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: sample-app/coverage/
+          retention-days: 30
+      
+      - name: Comment on PR with coverage
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const coverage = JSON.parse(fs.readFileSync('./sample-app/coverage/coverage-summary.json', 'utf8'));
+            const total = coverage.total;
+            const comment = `
+            ## 📊 Code Coverage Report
+            
+            - **Line Coverage:** ${total.lines.pct}%
+            - **Statement Coverage:** ${total.statements.pct}%
+            - **Function Coverage:** ${total.functions.pct}%
+            - **Branch Coverage:** ${total.branches.pct}%
+            `;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+        continue-on-error: true
