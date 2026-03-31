@@ -41,7 +41,7 @@ jobs:
       
       - name: Display formal output
         run: |
-            echo "Output: ${{ steps.formal.outputs.greeting-message }}"
+          echo "Output: ${{ steps.formal.outputs.greeting-message }}"
 
   test-custom-action-casual:
     name: Test Custom Action - Casual
@@ -59,7 +59,7 @@ jobs:
       
       - name: Display casual output
         run: |
-            echo "Output: ${{ steps.casual.outputs.greeting-message }}"
+          echo "Output: ${{ steps.casual.outputs.greeting-message }}"
 
   test-custom-action-default:
     name: Test Custom Action - Default
