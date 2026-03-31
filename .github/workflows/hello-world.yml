@@ -42,7 +42,9 @@ jobs:
           fi
       
       - name: Access secret (Task 6)
-        run: echo "Secret length: ${#{{ secrets.TEST_SECRET }}}"
+        run: |
+          echo "Secret is configured and will be masked in logs"
+          echo "Using secret: ${{ secrets.TEST_SECRET }}"
         continue-on-error: true
       
       - name: Print success message
