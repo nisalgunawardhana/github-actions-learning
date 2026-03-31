@@ -1,0 +1,78 @@
+name: Artifacts Workflow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-with-artifacts:
+    name: Build and Create Artifacts
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'sample-app/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: ./sample-app
+        run: npm ci
+      
+      - name: Run tests
+        working-directory: ./sample-app
+        run: npm test
+      
+      - name: Create build artifact
+        run: |
+          echo "Build completed on $(date)" > build-output.txt
+          echo "Git SHA: ${{ github.sha }}" >> build-output.txt
+          echo "This is the build artifact for Task 8" >> build-output.txt
+      
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: build-output.txt
+          retention-days: 30
+      
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: sample-app/coverage/
+          retention-days: 30
+
+  download-and-process-artifacts:
+    name: Download and Process Artifacts
+    runs-on: ubuntu-latest
+    needs: build-with-artifacts
+    
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output
+      
+      - name: Display artifact content
+        run: |
+          echo "📦 Artifact Content:"
+          cat build-output.txt
+      
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-report
+      
+      - name: Display coverage summary
+        run: |
+          echo "✅ Coverage artifact downloaded"
+          if [ -f coverage-summary.json ]; then
+            echo "Coverage summary available"
+          fi

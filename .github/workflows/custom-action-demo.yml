@@ -1,0 +1,72 @@
+name: Custom Action Demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-custom-action-friendly:
+    name: Test Custom Action - Friendly
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use hello-world action (friendly)
+        id: friendly
+        uses: ./.github/actions/hello-world-action
+        with:
+          name: GitHub Actions Learner
+          greeting-style: friendly
+      
+      - name: Display friendly output
+        run: |
+          echo "Message: ${{ steps.friendly.outputs.greeting-message }}"
+          echo "Time: ${{ steps.friendly.outputs.timestamp }}"
+
+  test-custom-action-formal:
+    name: Test Custom Action - Formal
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use hello-world action (formal)
+        id: formal
+        uses: ./.github/actions/hello-world-action
+        with:
+          name: Developer
+          greeting-style: formal
+      
+      - name: Display formal output
+        run: |
+          echo "Output: ${{ steps.formal.outputs.greeting-message }}"
+
+  test-custom-action-casual:
+    name: Test Custom Action - Casual
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use hello-world action (casual)
+        id: casual
+        uses: ./.github/actions/hello-world-action
+        with:
+          name: Dev Team
+          greeting-style: casual
+      
+      - name: Display casual output
+        run: |
+          echo "Output: ${{ steps.casual.outputs.greeting-message }}"
+
+  test-custom-action-default:
+    name: Test Custom Action - Default
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use hello-world action (default)
+        uses: ./.github/actions/hello-world-action

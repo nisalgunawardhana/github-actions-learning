@@ -15,9 +15,14 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     
+    # Environment variables (Task 5)
+    env:
+      NODE_ENV: test
+      LOG_LEVEL: debug
+    
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x, 18.x, 20.x]
     
     steps:
       - name: Checkout code
@@ -29,6 +34,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: 'sample-app/package-lock.json'
+      
+      # Print environment variables (Task 5)
+      - name: Print environment
+        run: |
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
       
       - name: Install dependencies
         working-directory: ./sample-app
@@ -47,7 +58,7 @@ jobs:
         working-directory: ./sample-app
         run: npm test
       
-      - name: Upload coverage reports
+      - name: Upload coverage reports (Task 8 & Challenge 2)
         if: matrix.node-version == '18.x'
         uses: actions/upload-artifact@v3
         with:
@@ -78,7 +89,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'sample-app/package-lock.json'
       
-      - working-directory: ./sample-app
+      - name: Install dependencies
+        working-directory: ./sample-app
         run: npm ci
       
       - name: Run ESLint

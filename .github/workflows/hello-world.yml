@@ -31,5 +31,21 @@ jobs:
       - name: List files
         run: ls -la
       
+      - name: Test branch detection
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "✅ Running on main branch"
+          elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            echo "✅ Running on develop branch"
+          else
+            echo "⚠️ Running on: ${{ github.ref }}"
+          fi
+      
+      - name: Access secret (Task 6)
+        run: |
+          echo "Secret is configured and will be masked in logs"
+          echo "Using secret: ${{ secrets.TEST_SECRET }}"
+        continue-on-error: true
+      
       - name: Print success message
         run: echo "✅ Workflow completed successfully!"
