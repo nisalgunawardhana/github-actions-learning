@@ -5,9 +5,19 @@ on:
     branches:
       - develop
 
+env:
+  MY_NAME: "Charith"
+
 jobs:
   custom-job:
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: "development"
     steps:
       - name: Print a greeting
         run: echo "Hello! This custom workflow is running on the develop branch."
+      
+      - name: Print Environment Variables
+        run: |
+          echo "User Name is: $MY_NAME"
+          echo "Current Environment is: $APP_ENV"
