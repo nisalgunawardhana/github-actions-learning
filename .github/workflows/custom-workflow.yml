@@ -1,0 +1,13 @@
+name: Custom Develop Workflow
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  custom-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a greeting
+        run: echo "Hello! This custom workflow is running on the develop branch."
