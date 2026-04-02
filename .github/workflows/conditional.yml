@@ -1,0 +1,21 @@
+name: Conditional Workflow
+
+on:
+  push:
+    branches:
+      - working-advanced-charith
+
+jobs:
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Always run this step
+        run: echo "This step runs every time."
+
+      - name: Step 2 - Deploy to Production (Main only)
+        if: github.ref == 'refs/heads/main'
+        run: echo "Deploying to production server..."
+        
+      - name: Step 3 - Run tests (Feature branches only)
+        if: github.ref != 'refs/heads/main'
+        run: echo "Running tests for feature branch..."
