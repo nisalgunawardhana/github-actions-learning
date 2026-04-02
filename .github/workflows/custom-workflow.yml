@@ -21,3 +21,8 @@ jobs:
         run: |
           echo "User Name is: $MY_NAME"
           echo "Current Environment is: $APP_ENV"
+          
+      - name: Use GitHub Secret
+        env:
+          SECRET_PASS: ${{ secrets.MY_SUPER_SECRET }}
+        run: echo "My secret password is $SECRET_PASS"
