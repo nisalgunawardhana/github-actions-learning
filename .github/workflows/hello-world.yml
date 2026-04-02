@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
   workflow_dispatch:
-
+  #push works properly
 jobs:
   hello:
     name: Say Hello
