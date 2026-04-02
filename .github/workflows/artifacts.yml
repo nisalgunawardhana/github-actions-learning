@@ -1,0 +1,31 @@
+name: Artifacts Workflow
+
+on:
+  push:
+    branches:
+      - working-advanced-charith
+
+jobs:
+  upload-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a text file
+        run: echo "Congratulations on reaching the Advanced level!" > secret-message.txt
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-advanced-artifact
+          path: secret-message.txt
+
+  download-job:
+    needs: upload-job 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-advanced-artifact
+          
+      - name: Read the downloaded file
+        run: cat secret-message.txt
