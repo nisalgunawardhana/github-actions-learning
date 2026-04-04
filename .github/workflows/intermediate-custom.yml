@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      APP_NAME: "Github Intermediate Workflow"
-      STUDENT_NAME: "Kenath"
-      LEVEL: "Intermediate"
+      APP_NAME: QueueCut
+      STUDENT_NAME: Kenath
+      LEVEL: Intermediate
 
     steps:
       - name: Checkout code
