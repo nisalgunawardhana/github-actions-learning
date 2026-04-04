@@ -1,0 +1,32 @@
+name: Intermediate Custom Workflow
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  custom-job:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_NAME: "Github Intermediate Workflow"
+      STUDENT_NAME: "Kenath"
+      LEVEL: "Intermediate"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print custom message
+        run: echo "Intermediate workflow is running on develop branch!"
+
+      - name: Show branch name
+        run: echo "Current branch is $GITHUB_REF_NAME"
+
+      - name: Print environment variables
+        run: |
+          echo "App Name: $APP_NAME"
+          echo "Student Name: $STUDENT_NAME"
+          echo "Level: $LEVEL"
