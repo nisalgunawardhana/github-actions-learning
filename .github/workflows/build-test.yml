@@ -14,6 +14,10 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+
+    env:                  # Added environment variables
+      NODE_ENV: test
+      LOG_LEVEL: debug
     
     strategy:
       matrix:
@@ -23,6 +27,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
+      - name: Print environment       # Added step to print variables
+        run: |
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -63,7 +72,6 @@ jobs:
             echo "✅ Coverage report generated"
           else
             echo "⚠️ No coverage report found"
-          fi
 
   lint-check:
     name: Lint Check
