@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      APP_NAME: "Github Intermediate Workflow"
+      APP_NAME: Github Intermediate Workflow
       STUDENT_NAME: Kenath
       LEVEL: Intermediate
 
@@ -30,3 +30,10 @@ jobs:
           echo "App Name: $APP_NAME"
           echo "Student Name: $STUDENT_NAME"
           echo "Level: $LEVEL"
+
+      - name: Use GitHub Secret
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+        run: |
+          echo "Secret is available"
+          echo "$MY_SECRET"
