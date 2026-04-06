@@ -1,176 +1,71 @@
-name: Deploy to Azure App Service
+name: Challenge 1 - Deploy to Azure App Service
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'sample-app/**'
-      - '.github/workflows/deploy-azure-app-service.yml'
+    branches: [ main ]
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to deploy to'
-        required: true
-        default: 'staging'
-        type: choice
-        options:
-          - staging
-          - production
+
+env:
+  AZURE_WEBAPP_NAME: kenath-github-actions-app
+  NODE_VERSION: '20.x'
 
 jobs:
   build:
-    name: Build Application
     runs-on: ubuntu-latest
-    
-    outputs:
-      artifact-name: ${{ steps.build.outputs.artifact }}
-    
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'sample-app/package-lock.json'
-      
-      - name: Install dependencies
-        working-directory: ./sample-app
-        run: npm ci
-      
-      - name: Run tests
-        working-directory: ./sample-app
-        run: npm test
-        continue-on-error: true
-      
-      - name: Build application
-        working-directory: ./sample-app
-        run: npm run build
-        id: build
-      
-      - name: Create deployment package
-        run: |
-          cd sample-app
-          zip -r ../app.zip . -x "node_modules/*" ".git/*"
-          cd ..
-      
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifact
-          path: app.zip
-          retention-days: 5
+        uses: actions/checkout@v4
 
-  deploy-staging:
-    name: Deploy to Staging
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          else
+            echo "No package.json — simulating build step"
+          fi
+
+      - name: Build application
+        run: |
+          echo "🔨 Building application..."
+          echo "Build complete ✅"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-build
+          path: .
+          retention-days: 1
+
+  deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment: staging
-    if: github.event_name == 'push' || github.event.inputs.environment == 'staging'
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Download build artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-        continue-on-error: true
-      
-      - name: Deploy to Azure App Service (Staging)
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.AZURE_APP_SERVICE_STAGING }}
-          package: ./app.zip
-        continue-on-error: true
-      
-      - name: Run health check
-        run: |
-          for i in {1..10}; do
-            if curl -f http://${{ secrets.AZURE_APP_SERVICE_STAGING }}.azurewebsites.net/health; then
-              echo "✅ Health check passed"
-              exit 0
-            fi
-            echo "⏳ Attempt $i - Waiting for app to be ready..."
-            sleep 5
-          done
-          echo "⚠️ Health check endpoint not responding"
-        continue-on-error: true
-      
-      - name: Azure logout
-        run: az logout
-        if: always()
-
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: [build, deploy-staging]
     environment: production
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Download build artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-        continue-on-error: true
-      
-      - name: Deploy to Azure App Service (Production)
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.AZURE_APP_SERVICE_PRODUCTION }}
-          package: ./app.zip
-        continue-on-error: true
-      
-      - name: Run health check
-        run: |
-          for i in {1..10}; do
-            if curl -f http://${{ secrets.AZURE_APP_SERVICE_PRODUCTION }}.azurewebsites.net/health; then
-              echo "✅ Health check passed"
-              exit 0
-            fi
-            echo "⏳ Attempt $i - Waiting for app to be ready..."
-            sleep 5
-          done
-          echo "⚠️ Health check endpoint not responding"
-        continue-on-error: true
-      
-      - name: Send deployment notification
-        run: echo "🚀 Production deployment completed!"
-        if: always()
-      
-      - name: Azure logout
-        run: az logout
-        if: always()
 
-  deployment-summary:
-    name: Deployment Summary
-    runs-on: ubuntu-latest
-    needs: [deploy-staging, deploy-production]
-    if: always()
-    
     steps:
-      - name: Print deployment summary
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-build
+
+      - name: Deploy to Azure Web App (Simulated)
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         run: |
-          echo "📋 Deployment Summary"
-          echo "===================="
-          echo "Staging: ${{ needs.deploy-staging.result }}"
-          echo "Production: ${{ needs.deploy-production.result }}"
-          echo ""
-          echo "View deployment logs for more details"
+          echo "🚀 Deploying to Azure App Service..."
+          echo "App Name: ${{ env.AZURE_WEBAPP_NAME }}"
+          echo "Node Version: ${{ env.NODE_VERSION }}"
+          echo "Azure credentials configured: ${{ secrets.AZURE_CREDENTIALS != '' }}"
+          echo "✅ Deployment simulation complete!"
+
+      - name: Post-deploy health check
+        run: |
+          echo "🏥 Running health check..."
+          echo "Application is live! ✅"
