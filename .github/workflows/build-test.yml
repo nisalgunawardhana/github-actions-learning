@@ -40,7 +40,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./sample-app
-        run: npm ci
+        run: npm install  # Changed from: npm ci
 
       - name: Run tests
         working-directory: ./sample-app
@@ -57,7 +57,7 @@ jobs:
         with:
           node-version: '18'
 
-      - run: npm ci
+      - run: npm install  # Changed from: npm ci
         working-directory: ./sample-app
 
       - run: npm run lint
