@@ -23,6 +23,18 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
+  download_job:
+    needs: build  # This tells GitHub to wait for the first job to finish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+
+      - name: Read the file
+        run: cat output.txt
+    
 
     steps:
       - name: Print environment
@@ -45,6 +57,15 @@ jobs:
       - name: Run tests
         working-directory: ./sample-app
         run: npm test
+
+      - name: Create artifact
+        run: echo "Build output" > output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: output.txt
 
   lint-check:
     name: Lint Check
