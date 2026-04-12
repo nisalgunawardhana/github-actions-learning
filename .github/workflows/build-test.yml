@@ -13,7 +13,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
+  strategy:
+    matrix:
+      node-version: [16.x, 18.x, 20.x]
+      
     env:
       NODE_ENV: test
       LOG_LEVEL: debug
@@ -76,10 +80,16 @@ jobs:
           else
             echo "⚠️ No coverage report found"
           fi
-       - name: Print environment
+      - name: Print environment
         run: |
           echo "Environment: ${{ env.NODE_ENV }}"
           echo "Log Level: ${{ env.LOG_LEVEL }}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
   lint-check:
     name: Lint Check
     runs-on: ubuntu-latest
