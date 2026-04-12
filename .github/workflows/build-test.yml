@@ -11,6 +11,13 @@ on:
   workflow_dispatch:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      LOG_LEVEL: debug
+  
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
@@ -20,6 +27,11 @@ jobs:
         node-version: [16.x, 18.x]
     
     steps:
+      - name: Print environment
+        run: |
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
+      
       - name: Checkout code
         uses: actions/checkout@v3
       
@@ -64,7 +76,10 @@ jobs:
           else
             echo "⚠️ No coverage report found"
           fi
-
+       - name: Print environment
+        run: |
+          echo "Environment: ${{ env.NODE_ENV }}"
+          echo "Log Level: ${{ env.LOG_LEVEL }}"
   lint-check:
     name: Lint Check
     runs-on: ubuntu-latest
@@ -94,7 +109,5 @@ jobs:
     
     steps:
       - name: Print test results
-        run: |
-          echo "🎯 Test Run Summary"
-          echo "==================="
-          echo "✅ All tests completed"
+
+   
