@@ -1,0 +1,27 @@
+name: Conditional Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  conditional-job:
+    name: Conditional Execution Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show current branch
+        run: echo "Current branch is ${{ github.ref }}"
+
+      - name: Deploy (main only)
+        if: github.ref == 'refs/heads/main'
+        run: echo "Deploying to production..."
+
+      - name: Develop branch message
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Development branch - deployment skipped"

@@ -60,7 +60,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Internal server error' });
 });
-
+// Task 10 feature update
 // Start server only when run directly (avoid starting during tests)
 if (require.main === module) {
   app.listen(PORT, () => {
