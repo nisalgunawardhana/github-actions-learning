@@ -1,4 +1,4 @@
-# Beginner Badge Submission - Your Name
+# Beginner Badge Submission - Raissi Anouer
 
 **Date:** January 2026
 **Status:** Submitted for Review
@@ -12,13 +12,18 @@
 ## Evidence
 
 ### Task 1: Hello World Workflow
-[Screenshot showing successful workflow run]
+![Task 1: Run Your First Workflow](../../images/Task-1-Run-Your-First-Workflow.png)
 
 ### Task 2: Push Trigger
-[Screenshot showing workflow triggered automatically on push]
+![Task 2: Understand Workflow Triggers](../../images/Task-2.png)
 
 ### Task 3: Local Tests
-[Screenshot showing npm test output - all passing]
+![Task 3: Test Output](../../images/Task-3.png)
+
+#### Server and API Verification
+![Task 3: Server Start](../../images/task-3-npm-start.png)
+![Task 3: Hello API](../../images/task-3-hello-api.png)
+![Task 3: Status API](../../images/task-3-status-api.png)
 
 ## Notes
-Any challenges faced or additional context.
+Completed all three beginner tasks: workflow manual dispatch, push event triggers, and local testing and verification.
