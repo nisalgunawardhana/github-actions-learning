@@ -1,0 +1,12 @@
+name: Test Work flow
+
+on: push
+
+jobs:
+
+  test:
+   runs-on: ubuntu-latest
+
+   steps:
+     - name: Testing
+       run: echo "TESTING"
