@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Print hello message
         run: echo "🎉 Hello from GitHub Actions!"
-      
+      #this prints a string called hello from github actions
       - name: Print current time
         run: date
       
